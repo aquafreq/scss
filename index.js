@@ -3,5 +3,6 @@ window.addEventListener('load', () => {
     
     document.addEventListener('click', () => {
         box3.classList.toggle('animation-play-state-paused');
+        console.log('taged by list :) ')
     })
 })
