@@ -1,0 +1,77 @@
+body  {
+    // background-color : blue;
+    height: 100vh;
+}
+
+.box-container {
+    height: 100vh;
+    display: flex;
+}
+
+.box {
+    margin: 2em;
+    border: 1px solid orange;
+    width: 10em;
+}
+
+$boxes : 5;
+
+@for $i from 1 through $boxes {
+    .box-#{$i} {
+            background-color: lighten(red, $i * 5%);
+        height: 100 + $i * 50;
+    }
+}
+
+.box-1 {
+    // animation: increaseBorderWidth 10s ease-in-out infinite;
+}
+
+.box-2 {
+    position: relative;
+    // animation: increaseBorderWidth 5s ease-in infinite;
+}
+
+.box-3 {
+    position: relative;
+    animation-name: moveBox;
+    animation-duration: 3s;
+    animation-timing-function: cubic-bezier(1,0,0,1);
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    // animation-play-state: ;
+    outline: 10px solid transparent;
+    transition: outline 2s;
+}
+
+.animation-play-state-paused {
+    animation-play-state: paused;
+    outline-color:purple;
+}
+
+
+@keyframes moveBox {
+    $value: 0;
+ @for $i from 1 through 100 {
+     #{$i}% {
+        // $value: #{$i * 2};
+        $percent: $i;
+        top: #{$percent}em;
+        // }
+     }
+    }
+    100% {
+        background-color: black;
+        // top: #{$value};
+    }
+}
+
+@keyframes increaseBorderWidth {
+    @for $i from 0 through 10 {
+        #{$i * 10}% {
+            border-width: (($i + 1)  * 10) + ($i * 2);
+        }
+    }
+}
