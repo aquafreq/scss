@@ -1,0 +1,27 @@
+body  {
+    // background-color : blue;
+}
+
+.box-container {
+    display: flex;
+}
+.box {
+    margin: 2em;
+    border: 1px solid orange;
+    width: 10em;
+}
+
+$boxes : 5;
+
+@for $i from 1 through $boxes {
+    .box-#{$i} {
+            background-color: lighten(red, $i * 5%);
+        height: 100 + $i * 50;
+    }
+}
+
+// @for $i from 1 through 4 {
+//     .box-#{$i} {
+//        height: 35px + ($i * 10);
+//     }
+//   }
