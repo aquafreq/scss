@@ -1,0 +1,220 @@
+///////////////////////////////////////////////////
+
+/* The parent container, with perspective */
+.container {
+  width: 800px;
+  height: 800px;
+  border: 2px solid white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  perspective-origin: top right;
+  margin: 200px auto;
+}
+
+/* The child element, with 3D tranforms preserved */
+.cube {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: cubeRotate 10s linear infinite, moveCubeInside 10s linear infinite
+  
+;
+  @keyframes moveCubeInside {
+    0% {
+      transform: translateZ(199px) translateY(400px);
+    }
+
+    // translate3d(tx, ty, tz)
+
+    18% {
+      transform: translate3d(395px, 395px, 200px);
+      .top {
+
+      }
+    }
+
+    27% {
+      transform: translate3d(395px, 395px, -195px);
+    }
+
+    36% {
+      transform: translate3d(0, 395px, -195px);
+    }
+
+    45% {
+      transform: translate3d(0, 395px, 195px);
+    }
+    54% {
+      transform: translate3d(0, 0, 195px);
+    }
+    63% {
+      transform: translate3d(0, 0, -195px);
+    }
+    72% {
+      transform: translate3d(395px, 0, -195px);
+    }
+    81% {
+      transform: translate3d(395px, 0, 195px);
+    }
+    90% {
+      transform: translate3d(0, 0, 195px);
+    }
+
+    100% {
+      animation-timing-function: ease-out;
+      transform: translate3d(0, 395px, 195px);
+    }
+  }
+}
+
+/* The sides of the cube, absolutely positioned */
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  border: 2px solid white;
+}
+
+/* Background colors for the cube's sides to help visualize the work */
+.front {
+  background-color: #d50000;
+}
+.back {
+  background-color: #aa00ff;
+}
+
+.left {
+  background-color: #304ffe;
+}
+.right {
+  background-color: #0091ea;
+}
+
+.top {
+  background-color: #00bfa5;
+  //   animation: holdSide 3s linear;
+}
+.bottom {
+  background-color: #64dd17;
+}
+
+.front {
+  transform: translateZ(100px);
+}
+.back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+
+.left {
+    animation: moveLeft 2s infinite;
+    // animation-delay: 1s;
+    transform: translateX(-100px) rotateY(90deg);
+    @keyframes moveLeft {
+        0%, 100% {
+            transform: translateX(0) rotateY(90deg);
+            // transform: translateX(-100px) rotateY(90deg);
+        }
+        
+        50% {
+            transform: translateX(-200px) rotateY(90deg);
+        }
+    }
+}
+.right {
+  transform: translateX(100px) rotateY(90deg);
+}
+
+.top {
+    //    moveTop 3s infinite
+
+    // @keyframes moveTop {
+    //     0% {
+            transform: translateY(-100px) rotateX(90deg);
+    //     }
+    //     100% {
+    //         transform: translateY(-400px) rotateX(90deg);
+    //     }
+    // }
+}
+.bottom {
+  transform: translateY(100px) rotateX(90deg);
+}
+
+.spinning-side {
+  width: 50%;
+  height: 25%;
+  background-color: black;
+  left: 25%;
+  top: 45%;
+  animation: spinSide 4s ease-in-out infinite alternate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::after {
+    content: "Hello 3D!";
+    color: white;
+    text-decoration: underline;
+    font-size: 20px;
+    font-family: cursive;
+  }
+}
+
+@keyframes spinSide {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes cubeRotate {
+  from {
+    transform: rotateY(0deg) rotateX(720deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(0deg) rotateZ(360deg);
+  }
+}
+
+.outer-cube {
+  transform-style: preserve-3d;
+  width: 600px;
+  height: 600px;
+  position: relative;
+  &__side {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  &__front {
+    background-color: #666a;
+    transform: translateZ(300px);
+  }
+  &__back {
+    background-color: #666b;
+    transform: rotateY(180deg) translateZ(300px);
+  }
+  &__left {
+    background-color: #666c;
+    transform: translateX(-300px) rotateY(90deg);
+  }
+  &__right {
+    background-color: #666d;
+    transform: translateX(300px) rotateY(90deg);
+  }
+  &__top {
+    background-color: #666e;
+    transform: translateY(-300px) rotateX(90deg);
+  }
+  &__bottom {
+    background-color: #666f;
+    transform: translateY(300px) rotateX(90deg);
+  }
+}
