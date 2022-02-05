@@ -23,6 +23,7 @@ $boxes : 5;
     }
 }
 
+
 .box-1 {
     // animation: increaseBorderWidth 10s ease-in-out infinite;
 }
@@ -75,3 +76,9 @@ $boxes : 5;
         }
     }
 }
+
+// @for $i from 1 through 4 {
+//     .box-#{$i} {
+//        height: 35px + ($i * 10);
+//     }
+//   }
