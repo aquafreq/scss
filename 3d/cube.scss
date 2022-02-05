@@ -4,153 +4,184 @@
 .container {
   width: 800px;
   height: 800px;
-  border: 2px solid white;
+  // border: 2px solid white;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1000px;
-  perspective-origin: top right;
-  margin: 200px auto;
+  perspective: 4000px;
+  perspective-origin: center calc(50% - 2.4em);
+  margin: 300px auto;
+
+  
+
 }
 
-/* The child element, with 3D tranforms preserved */
+.outer-cube {
+  transform-style: preserve-3d;
+  animation: rotateY 60s linear infinite
+  ;
+  perspective-origin: top right;
+  transform: rotateX(-20deg);
+  width: 400px;
+  height: 400px;
+  position: relative;
+  &__side {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  &__front {
+    background-color: #6662;
+    transform: translateZ(200px);
+  }
+  &__back {
+    background-color: #6663;
+    transform: rotateY(180deg) translateZ(200px);
+  }
+  &__left {
+    background-color: #6664;
+    transform: translateX(-200px) rotateY(90deg);
+  }
+  &__right {
+    background-color: #6665;
+    transform: translateX(200px) rotateY(90deg);
+  }
+  &__top {
+    background-color: #6666;
+    transform: translateY(-200px) rotateX(90deg);
+  }
+  &__bottom {
+    background-color: #6667;
+    transform: translateY(200px) rotateX(90deg);
+  }
+}
 .cube {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   transform-style: preserve-3d;
-  animation: cubeRotate 10s linear infinite, moveCubeInside 10s linear infinite
-  
+  animation: 
+  // cubeRotate 10s linear infinite, 
+  // rotateY 15s linear infinite,
+  moveCubeInside 10s linear infinite
+  // rotate 5s ease-in-out infinite
+
 ;
+
+
   @keyframes moveCubeInside {
     0% {
-      transform: translateZ(199px) translateY(400px);
+      transform: translate3d(1px, 1px, -149px);
+      animation-timing-function: ease-in-out;
     }
-
-    // translate3d(tx, ty, tz)
-
+    
+    9% {
+      transform: translate3d(1px, 1px, 149px);
+      animation-timing-function: ease-in-out;
+    }
+    
     18% {
-      transform: translate3d(395px, 395px, 200px);
-      .top {
-
-      }
+      transform: translate3d(299px, 1px, 149px);
+      animation-timing-function: ease-in-out;
     }
-
     27% {
-      transform: translate3d(395px, 395px, -195px);
+      transform: translate3d(299px, 1px, -149px);
+      animation-timing-function: ease-in-out;
     }
-
     36% {
-      transform: translate3d(0, 395px, -195px);
+      transform: translate3d(1px, 1px, -149px);
+      animation-timing-function: ease-out;
     }
-
     45% {
-      transform: translate3d(0, 395px, 195px);
+      transform: translate3d(1px, 299px, -149px);
+      animation-timing-function: ease-out;
     }
     54% {
-      transform: translate3d(0, 0, 195px);
+      transform: translate3d(1px, 299px, 149px);
+      animation-timing-function: ease-out;
     }
     63% {
-      transform: translate3d(0, 0, -195px);
+      transform: translate3d(299px, 299px, 149px);
+      animation-timing-function: ease;
     }
     72% {
-      transform: translate3d(395px, 0, -195px);
+      transform: translate3d(299px, 299px, -149px);
+      animation-timing-function: ease;
     }
     81% {
-      transform: translate3d(395px, 0, 195px);
+      transform: translate3d(1px, 299px, -149px);
+      animation-timing-function: ease;
     }
-    90% {
-      transform: translate3d(0, 0, 195px);
-    }
-
     100% {
-      animation-timing-function: ease-out;
-      transform: translate3d(0, 395px, 195px);
+      animation-timing-function: ease;
+      transform: translate3d(1px, 1px, -149px);
     }
   }
 }
 
 /* The sides of the cube, absolutely positioned */
 .side {
+  // animation: rotate 10s linear infinite;
+
   position: absolute;
   width: 100%;
   height: 100%;
   opacity: 0.9;
-  border: 2px solid white;
+  // border: 2px solid white;
 }
 
 /* Background colors for the cube's sides to help visualize the work */
 .front {
-  background-color: #d50000;
+  // background-color: #d50000;
+  background-image: linear-gradient(to bottom, red, yellow);
 }
 .back {
-  background-color: #aa00ff;
+  background-image: linear-gradient(to top, red,orange,yellow,green,blue,indigo,violet);
 }
 
 .left {
-  background-color: #304ffe;
+  background-image: linear-gradient(to right, green, yellow, orange);
 }
 .right {
-  background-color: #0091ea;
+  background-image: linear-gradient(to left, purple, blue, black);
 }
 
 .top {
-  background-color: #00bfa5;
-  //   animation: holdSide 3s linear;
+  background-image: repeating-linear-gradient(red, yellow 10%, green 20%);
 }
 .bottom {
-  background-color: #64dd17;
+  background-image: repeating-linear-gradient(orange, black 10%, orange 40%);
 }
 
 .front {
-  transform: translateZ(100px);
+  transform: translateZ(50px);
 }
 .back {
-  transform: rotateY(180deg) translateZ(100px);
+  transform: rotateY(180deg) translateZ(50px);
 }
 
 .left {
-    animation: moveLeft 2s infinite;
-    // animation-delay: 1s;
-    transform: translateX(-100px) rotateY(90deg);
-    @keyframes moveLeft {
-        0%, 100% {
-            transform: translateX(0) rotateY(90deg);
-            // transform: translateX(-100px) rotateY(90deg);
-        }
-        
-        50% {
-            transform: translateX(-200px) rotateY(90deg);
-        }
-    }
+    transform: translateX(-50px) rotateY(90deg);
 }
 .right {
-  transform: translateX(100px) rotateY(90deg);
+  transform: translateX(50px) rotateY(90deg) rotateZ(90deg);
 }
 
 .top {
-    //    moveTop 3s infinite
-
-    // @keyframes moveTop {
-    //     0% {
-            transform: translateY(-100px) rotateX(90deg);
-    //     }
-    //     100% {
-    //         transform: translateY(-400px) rotateX(90deg);
-    //     }
-    // }
+    transform: translateY(-50px) rotateX(90deg);
 }
 .bottom {
-  transform: translateY(100px) rotateX(90deg);
+  transform: translateY(50px) rotateX(90deg);
 }
 
 .spinning-side {
   width: 50%;
-  height: 25%;
+  height: 50%;
   background-color: black;
-  left: 25%;
-  top: 45%;
+  left: 15%;
+  top: 10%;
+  padding: .8em;
   animation: spinSide 4s ease-in-out infinite alternate;
   display: flex;
   justify-content: center;
@@ -183,38 +214,14 @@
   }
 }
 
-.outer-cube {
-  transform-style: preserve-3d;
-  width: 600px;
-  height: 600px;
-  position: relative;
-  &__side {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+@keyframes rotateY {
+  to {
+    transform: rotateY(120deg) rotateX(120deg) rotateZ(120deg);
   }
-  &__front {
-    background-color: #666a;
-    transform: translateZ(300px);
+  
+}
+@keyframes rotateX {
+  to {
   }
-  &__back {
-    background-color: #666b;
-    transform: rotateY(180deg) translateZ(300px);
-  }
-  &__left {
-    background-color: #666c;
-    transform: translateX(-300px) rotateY(90deg);
-  }
-  &__right {
-    background-color: #666d;
-    transform: translateX(300px) rotateY(90deg);
-  }
-  &__top {
-    background-color: #666e;
-    transform: translateY(-300px) rotateX(90deg);
-  }
-  &__bottom {
-    background-color: #666f;
-    transform: translateY(300px) rotateX(90deg);
-  }
+  
 }
